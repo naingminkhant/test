@@ -15,7 +15,7 @@ class CreateNamesTable extends Migration
     {
         Schema::create('names', function (Blueprint $table) {
             $table->id();
-            $table->string('fullname')->nullable();
+            $table->string('fullname');
             $table->string('given_name')->nullable();
             $table->string('family_name')->nullable();
             $table->string('nickname')->nullable();

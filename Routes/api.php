@@ -1,18 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
+use Modules\Name\Http\Controllers\NameController;
+use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::group(['prefix' => 'name', 'as' => 'name.'], function () {
+    Route::get('{name}', [NameController::class, 'show']);
+    Route::post('save', [NameController::class, 'store']);
 
-Route::middleware('auth:api')->get('/name', function (Request $request) {
-    return $request->user();
+    Route::get('edit/{name}', [NameController::class, 'edit']);
+    Route::put('update/{name}', [NameController::class, 'update']);
 });

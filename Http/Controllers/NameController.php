@@ -2,78 +2,70 @@
 
 namespace Modules\Name\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Controller;
+use Modules\Name\Entities\Name;
+use Modules\Name\Http\Requests\SaveNameRequest;
+use Modules\Name\Transformers\NameResource;
 
 class NameController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
-    {
-        return view('name::index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('name::create');
-    }
-
-    /**
      * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
+     * @param SaveNameRequest $request
+     * @return JsonResource
      */
-    public function store(Request $request)
+    public function store(SaveNameRequest $request): JsonResource
     {
-        //
+        $name = Name::create($request->validated());
+
+        return new NameResource($name);
     }
 
     /**
      * Show the specified resource.
-     * @param int $id
-     * @return Renderable
+     * @param Name $name
+     * @return JsonResource
      */
-    public function show($id)
+    public function show(Name $name): JsonResource
     {
-        return view('name::show');
+        return new NameResource($name);
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
+     * @param $id
+     * @return JsonResource
      */
-    public function edit($id)
+    public function edit($id): JsonResource
     {
-        return view('name::edit');
+        $name = Name::findOrFail($id);
+
+        return new NameResource($name);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
+     * @param SaveNameRequest $request
+     * @param Name $name
+     * @return JsonResource
      */
-    public function update(Request $request, $id)
+    public function update(SaveNameRequest $request, Name $name): JsonResource
     {
-        //
+        $name->update($request->validated());
+
+        return new NameResource($name);
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
+     * @param Name $name
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy(Name $name): JsonResource
     {
-        //
+        $name->delete();
+
+        return new NameResource($name);
     }
 }

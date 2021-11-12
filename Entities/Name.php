@@ -9,8 +9,13 @@ class Name extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
-    
+    protected $fillable = [
+        'fullname',
+        'given_name',
+        'family_name',
+        'nickname',
+    ];
+
     protected static function newFactory()
     {
         return \Modules\Name\Database\factories\NameFactory::new();
