@@ -15,7 +15,7 @@ class NameTest extends TestCase
     {
         $name = Name::factory()->make()->toArray();
 
-        $this->postJson('/api/name/save', $name)
+        $this->postJson('api/name', $name)
              ->assertStatus(201)
              ->assertJsonStructure([
                  'data' => [
@@ -35,7 +35,7 @@ class NameTest extends TestCase
                     ->setAttribute('fullname', null)
                     ->toArray();
 
-        $this->postJson('/api/name/save', $name)
+        $this->postJson('api/name', $name)
              ->assertStatus(422);
     }
 
@@ -45,7 +45,7 @@ class NameTest extends TestCase
         $name = Name::factory()->create()->toArray();
         $name['given_name'] = 'LARAVEL';
 
-        $this->putJson('api/name/update/' . $name['id'], $name)
+        $this->putJson('api/name/' . $name['id'], $name)
              ->assertSeeText("LARAVEL")
              ->isSuccessful();
     }
@@ -56,8 +56,17 @@ class NameTest extends TestCase
         $name = Name::factory()->create()->toArray();
         $name['fullname'] = null;
 
-        $this->putJson('api/name/update/' . $name['id'], $name)
+        $this->putJson('api/name/' . $name['id'], $name)
              ->assertJsonValidationErrors(['fullname'])
              ->assertStatus(422);
+    }
+
+    /** @test */
+    public function it_can_delete_a_name()
+    {
+        $name = Name::factory()->create();
+
+        $this->deleteJson('api/name/' . $name->id)
+             ->assertStatus(200);
     }
 }

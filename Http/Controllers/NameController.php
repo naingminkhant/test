@@ -33,18 +33,6 @@ class NameController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     * @param $id
-     * @return JsonResource
-     */
-    public function edit($id): JsonResource
-    {
-        $name = Name::findOrFail($id);
-
-        return new NameResource($name);
-    }
-
-    /**
      * Update the specified resource in storage.
      * @param SaveNameRequest $request
      * @param Name $name
@@ -60,12 +48,10 @@ class NameController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param Name $name
-     * @return JsonResource
+     * @return bool
      */
-    public function destroy(Name $name): JsonResource
+    public function destroy(Name $name): bool
     {
-        $name->delete();
-
-        return new NameResource($name);
+        return $name->delete();
     }
 }
