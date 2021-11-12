@@ -1,0 +1,17 @@
+{
+    "name": "Name",
+    "alias": "name",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Name\\Providers\\NameServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "minimumCoreVersion": "",
+    "title": "",
+    "version": 1.0,
+    "authors": []
+}

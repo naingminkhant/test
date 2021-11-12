@@ -1,0 +1,23 @@
+{
+    "name": "passsid/name",
+    "description": "",
+    "authors": [
+        {
+            "name": "Codigo",
+            "email": "codigo@mail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Name\\": ""
+        }
+    }
+}
